@@ -1,0 +1,11 @@
+{
+  "name": "practice-w3d2",
+  "version": "1.0.0",
+  "description": "test-test-test",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon CHALLENGE/index.js"
+  },
+  "author": "Erika",
+  "license": "MIT"
+}
