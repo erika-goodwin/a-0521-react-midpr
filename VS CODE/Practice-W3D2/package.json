@@ -4,7 +4,7 @@
   "description": "test-test-test",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon CHALLENGE/index.js"
+    "start": "nodemon 016_basic-sort/insertion-sort.js"
   },
   "author": "Erika",
   "license": "MIT"
