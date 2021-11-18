@@ -10,7 +10,7 @@ export default function Navbar(props) {
   return (
     <>
       <div className="">
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-gray-400">
           {({ open }) => (
             <>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,7 +19,7 @@ export default function Navbar(props) {
                     <div className="flex-shrink-0">
                       <img
                         className="h-8 w-8"
-                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                        src="https://img.icons8.com/doodle/100/000000/summer.png"
                         alt="Workflow"
                       />
                     </div>
@@ -81,8 +81,6 @@ export default function Navbar(props) {
             </>
           )}
         </Disclosure>
-
-
       </div>
     </>
   );

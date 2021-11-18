@@ -74,7 +74,7 @@ export default class WeatherApp extends Component {
     return (
       <>
         <header className="bg-white shadow">
-          <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
             <p class="pt-2 text-4xl  font-extrabold text-gray-900 sm:text-4xl sm:tracking-tight lg:text-6xl">
               Weather
             </p>
@@ -88,7 +88,7 @@ export default class WeatherApp extends Component {
             <form onSubmit={this.searchCity}>
               <label
                 for="name"
-                class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900 text-xl"
+                class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white font-medium text-gray-900 text-xl"
               >
                 City
               </label>
