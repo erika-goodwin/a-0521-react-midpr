@@ -4,7 +4,6 @@ import "./App.css";
 import Memo from "./components/Memo";
 import Navbar from "./components/Navbar";
 import WeatherApp from "./components/WeatherApp";
-import { Link } from "react-router-dom";
 
 const App = () => {
   //ContextAPI
@@ -13,7 +12,6 @@ const App = () => {
     <div className="h-screen w-screen items-center">
       {/* Navigation bar here */}
       <Navbar />
-
 
       {/* Routes */}
 

@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import Clock from "./Clock";
+import IconPick from "./IconPick";
 
 export default class WeatherDetails extends Component {
   render() {
-    const iconUrl = `http://openweathermap.org/img/w/${this.props.icon}.png`;
+    // const iconUrl = `http://openweathermap.org/img/w/${this.props.icon}.png`;
+
     return (
-      <div className="bg-white shadow sm:rounded-lg">
+      <div className="bg-white shadow sm:rounded-lg sm:px-6 lg:px-15 xl:px-20">
         <div className="px-4 py-5 sm:p-6">
           <h3 className="text-3xl  font-extrabold text-gray-900 sm:text-3xl sm:tracking-tight lg:text-5xl">
             {this.props.cityName}
@@ -15,10 +17,12 @@ export default class WeatherDetails extends Component {
               <p>show time here</p>
             </div>
             <div className="col-span-2 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
-              <Clock timezone={this.props.timezone}/>
+              <Clock timezone={this.props.timezone} />
             </div>
             <div className="col-span-2 row-span-3 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
-              <img src={iconUrl} alt="icon" className="text-center" />
+              {/* <img src={iconUrl} alt="icon" className="text-center" /> */}
+
+              <IconPick iconId={this.props.icon} />
             </div>
             <div className="col-span-2 row-span-2 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
               <div classNameName="flex flex-row">

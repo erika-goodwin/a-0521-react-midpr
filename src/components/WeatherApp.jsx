@@ -78,13 +78,13 @@ export default class WeatherApp extends Component {
             <p class="pt-2 text-4xl  font-extrabold text-gray-900 sm:text-4xl sm:tracking-tight lg:text-6xl">
               Weather
             </p>
-            <p class="max-w-xl mt-1 mb-1 mx-auto text-xl text-gray-500">
+            <p class="max-w-xl mt-1 mb-1 text-xl text-gray-500">
               Check your city's weather here
             </p>
           </div>
         </header>
-        <div className="text-center">
-          <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 ">
+        <div className="? text-center sm:px-6 lg:px-8">
+          <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600 lg:w-3/4 lg:m-auto">
             <form onSubmit={this.searchCity}>
               <label
                 for="name"
