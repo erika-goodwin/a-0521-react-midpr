@@ -1,35 +1,38 @@
-import React, { useState, useEffect } from 'react'
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
-import tz from 'dayjs/plugin/timezone'
+import React, { useState, useEffect } from "react";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import tz from "dayjs/plugin/timezone";
 
 const Clock = ({ dt, timezone }) => {
-  const [date, setDate] = useState()
-  dayjs.extend(utc)
-  dayjs.extend(tz)
+  const [date, setDate] = useState();
+  dayjs.extend(utc);
+  dayjs.extend(tz);
 
   useEffect(() => {
-    const timerID = setInterval(() => tick(), 1000)
-    
+    const timerID = setInterval(() => tick(), 1000);
+
     return () => {
-      clearInterval(timerID)
-    }
-  }, [timezone])
-  
+      clearInterval(timerID);
+    };
+  }, [timezone]);
+
   const tick = () => {
-    var date = new Date()
+    var date = new Date();
     var greenwichMeanTime = date.getTime() + date.getTimezoneOffset() * 60000;
-    const displayDate = dayjs(greenwichMeanTime + timezone * 1000 ).format('HH:mm:ss a');
-    setDate(displayDate)
-  }
+    const displayTime = dayjs(greenwichMeanTime + timezone * 1000).format(
+      "HH:mm:ss a"
+    );
+    setDate(displayTime);
+  };
 
   return (
     <>
-      <p>{date}</p>
+      <h4 className="text-lg font-bold text-center">Local Time:</h4>
+      <p className="pt-1">{date}</p>
     </>
-  )
-}
-export default Clock
+  );
+};
+export default Clock;
 
 // class Clock extends React.Component {
 //   constructor(props) {

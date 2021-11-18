@@ -1,7 +1,8 @@
 import React from "react";
 
-const IconPick =(props)=> {
+const IconPick = (props) => {
   const iconId = props.iconId;
+  console.log("iconPick iconCode:", iconId);
   const iconArray = [
     {
       id: "01d",
@@ -16,7 +17,7 @@ const IconPick =(props)=> {
     {
       id: "02d",
       des: "fewClouds",
-      icon: "https://img.icons8.com/doodle/48/000000/partly-cloudy-day--v1.png",
+      icon: "https://img.icons8.com/doodle/96/000000/partly-cloudy-day--v1.png",
     },
     {
       id: "02n",
@@ -26,7 +27,7 @@ const IconPick =(props)=> {
     {
       id: "03d",
       des: "scatteredClouds",
-      icon: "https://img.icons8.com/doodle/48/000000/partly-cloudy-day--v1.png",
+      icon: "https://img.icons8.com/doodle/96/000000/partly-cloudy-day--v1.png",
     },
     {
       id: "03n",
@@ -36,7 +37,7 @@ const IconPick =(props)=> {
     {
       id: "04d",
       des: "brokenClouds",
-      icon: "https://img.icons8.com/doodle/48/000000/partly-cloudy-day--v1.png",
+      icon: "https://img.icons8.com/doodle/96/000000/partly-cloudy-day--v1.png",
     },
     {
       id: "04n",
@@ -86,7 +87,7 @@ const IconPick =(props)=> {
     {
       id: "50d",
       des: "mist",
-      icon: "https://img.icons8.com/doodle/48/000000/partly-cloudy-day--v1.png",
+      icon: "https://img.icons8.com/doodle/96/000000/partly-cloudy-day--v1.png",
     },
     {
       id: "50n",
@@ -94,13 +95,16 @@ const IconPick =(props)=> {
       icon: "https://img.icons8.com/doodle/96/000000/moon-and-sun.png",
     },
   ];
-  const foundSame = iconArray.find(element=>element.id = iconId)
+  const foundSame = iconArray.find((element) => element.id === iconId);
+  console.log("picked object ", foundSame);
+  console.log("picked Description: ", foundSame.des);
+  console.log("picked iconURL: ", foundSame.des);
 
   return (
     <>
-    <img src={foundSame.icon} alt='icon' /> 
+      <img className="inline" src={foundSame.icon} alt="icon" />
     </>
   );
-}
+};
 
-export default IconPick
+export default IconPick;

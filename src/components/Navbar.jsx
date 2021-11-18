@@ -27,14 +27,14 @@ export default function Navbar(props) {
                       <div className="ml-10 flex items-baseline space-x-4">
                         <Link
                           to="/"
-                          class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                          className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
                           aria-current="page"
                         >
                           Weather App
                         </Link>
                         <Link
                           to="/memo"
-                          class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                          className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                         >
                           Memo
                         </Link>
@@ -65,14 +65,14 @@ export default function Navbar(props) {
                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                   <Link
                     to="/"
-                    class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                    className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
                     aria-current="page"
                   >
                     Weather App
                   </Link>
                   <Link
                     to="/memo"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                   >
                     Memo
                   </Link>
