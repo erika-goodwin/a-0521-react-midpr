@@ -1,5 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, createContext } from "react";
 import WeatherDetails from "./WeatherDetails";
+
+// const  IconContext = createContext();
 
 export default class WeatherApp extends Component {
   state = {
@@ -102,21 +104,22 @@ export default class WeatherApp extends Component {
             </form>
           </div>
         </div>
-
-        {this.state.cityName && (
-          <WeatherDetails
-            cityName={this.state.cityName}
-            temp={this.state.temp}
-            weather={this.state.weather}
-            high={this.state.high}
-            low={this.state.low}
-            icon={this.state.icon}
-            airpress={this.state.airpress}
-            humidity={this.state.humidity}
-            wind={this.state.wind}
-            timezone={this.state.timezone}
-          />
-        )}
+        {/* <IconContext.Provider value={this.state.icon}> */}
+          {this.state.cityName && (
+            <WeatherDetails
+              cityName={this.state.cityName}
+              temp={this.state.temp}
+              weather={this.state.weather}
+              high={this.state.high}
+              low={this.state.low}
+              icon={this.state.icon}
+              airpress={this.state.airpress}
+              humidity={this.state.humidity}
+              wind={this.state.wind}
+              timezone={this.state.timezone}
+            />
+          )}
+        {/* </IconContext.Provider> */}
       </>
     );
   }

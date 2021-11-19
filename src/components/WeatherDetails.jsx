@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Calender from "./Calender";
 import Clock from "./Clock";
 import IconPick from "./IconPick";
+import IconContext from "./WeatherApp";
 
 export default class WeatherDetails extends Component {
   render() {
@@ -21,39 +22,37 @@ export default class WeatherDetails extends Component {
             <div className="col-span-2 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
               <Clock timezone={this.props.timezone} />
             </div>
-            <div className="col-span-2 row-span-3 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:justify-between items-center">
+            <div className="col-span-4 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-evenly">
+              <h4 className="text-lg font-bold text-center">Max/Min:</h4>
+              <p className="pt-1">
+                {this.props.high} / {this.props.low}
+              </p>
+            </div>
+            <div className="col-span-2 row-span-2 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:justify-between flex-center">
               {/* <img src={iconUrl} alt="icon" className="text-center" /> */}
 
               <IconPick iconId={this.props.icon} />
+              {/* <p>↑Normal↓Context</p>
+              <IconContext.Consumer>
+                {({ value }) => {<IconPick />}}
+              </IconContext.Consumer> */}
             </div>
-            <div className="col-span-2 row-span-2 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
-              <div className="">
-                <h4 className="text-lg font-bold">Max/Min:</h4>
-                <p className="pt-1">
-                  {this.props.high} / {this.props.low}
-                </p>
-              </div>
+            <div className="col-span-2 row-span-1 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
+              <h4 className="text-lg font-bold text-center">Air pressure:</h4>
+              <p className="pt-1">{this.props.airpress}　hPa</p>
+            </div>
+            <div className="col-span-2 row-span-1 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
+              <h4 className="text-lg font-bold">Humidity:</h4>
+              <p className="pt-1">{this.props.humidity} %</p>
+            </div>
+            <div className="col-span-2 rounded-md font-bold  bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
+              <h4 className="text-lg font-bold text-center capitalize">
+                {this.props.weather}
+              </h4>
             </div>
             <div className="col-span-2 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
-              <p>{this.props.weather}</p>
-            </div>
-            <div className="col-span-2 row-span-1 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
-              <div>
-                <h4 className="text-lg font-bold text-center">Air pressure:</h4>
-                <p className="pt-1">{this.props.airpress}　hPa</p>
-              </div>
-            </div>
-            <div className="col-span-2 row-span-1 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
-              <div>
-                <h4 className="text-lg font-bold">Humidity:</h4>
-                <p className="pt-1">{this.props.humidity} %</p>
-              </div>
-            </div>
-            <div className="col-span-4 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
-              <div className="inline-flex">
-                <h4 className="text-lg font-bold ">Wind: </h4>
-                <p className="pt-1">{this.props.wind} m/s</p>
-              </div>
+              <h4 className="text-lg font-bold ">Wind: </h4>
+              <p className="pt-1">{this.props.wind} m/s</p>
             </div>
           </div>
         </div>
