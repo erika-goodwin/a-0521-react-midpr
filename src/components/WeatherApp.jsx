@@ -55,21 +55,6 @@ export default class WeatherApp extends Component {
         alert("No such a city found");
       });
 
-    //axios
-    //   axios(url).then((response) => {
-    //     console.log(response);
-    //     this.setState({
-    //       temp: response.data.main.temp,
-    //       cityName: response.data.name,
-    //       weather: response.data.weather[0].description,
-    //       high: response.data.main.temp_max,
-    //       low: response.data.main.temp_min,
-    //       icon: response.data.weather[0].icon,
-    //       airpress: response.data.main.pressure,
-    //       humidity: response.data.main.humidity,
-    //       wind: response.data.wind.speed,
-    //     });
-    //   });
   };
 
   render() {
@@ -77,7 +62,7 @@ export default class WeatherApp extends Component {
       <>
         <header className="bg-white shadow">
           <div className="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
-            <p class="pt-2 text-4xl  font-extrabold text-gray-900 sm:text-4xl sm:tracking-tight lg:text-6xl">
+            <p className="pt-2 text-4xl  font-extrabold text-gray-900 sm:text-4xl sm:tracking-tight lg:text-6xl">
               Weather
             </p>
             <p className="max-w-xl mt-1 mb-1 text-xl text-gray-500">
