@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { db } from "../../firebase/firebase";
+import { getDocs, collection } from "firebase/firestore";
 
 export default function Memo() {
+  useEffect(() => {
+    async function getMemos() {
+      const colRef = collection(db, "memos");
+      const docSnap = await getDocs(colRef);
+
+      docSnap.forEach((element) => {
+        console.log(element.data());
+      });
+    }
+    getMemos();
+  }, []);
+
   return (
     <div>
       <header className="bg-white shadow">

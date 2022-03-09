@@ -1,8 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Memo from "./components/Memo";
+import Memo from "./components/memo/Memo";
 import Navbar from "./components/Navbar";
 import WeatherApp from "./components/WeatherApp";
+import "./css/app.scss";
 
 const App = () => {
   //ContextAPI
