@@ -9,7 +9,8 @@ export const OpenModalContext = React.createContext(null);
 
 const App = () => {
   const [openModal, setOpenModal] = useState(false);
-  const contextValue = { openModal, setOpenModal };
+  const [selectedData, setSelectedData] = useState([]);
+  const contextValue = { openModal, setOpenModal, selectedData, setSelectedData };
 
   return (
     <OpenModalContext.Provider

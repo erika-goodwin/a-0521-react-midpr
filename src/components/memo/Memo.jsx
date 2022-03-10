@@ -8,10 +8,11 @@ import { OpenModalContext } from "../../App";
 
 export default function Memo() {
   const [memoData, setMemoData] = useState([]);
-  const [selectedData, setSelectedData] = useState([]);
+  // const [selectedData, setSelectedData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  console.log("memo page render");
+
   const { openModal, setOpenModal } = useContext(OpenModalContext);
+  const { selectedData, setSelectedData } = useContext(OpenModalContext);
 
   const openModalFunction = (data) => {
     setOpenModal(true);
@@ -26,17 +27,20 @@ export default function Memo() {
       const docSnap = await getDocs(colRef);
 
       docSnap.forEach((element) => {
-        setMemoData((pre) => [...pre, element.data()]);
+        const object = { ...element.data(), id: element.id };
+        setMemoData((pre) => [...pre, object]);
       });
     }
     getMemos();
     setIsLoading(false);
-    console.log("fetching data ");
   }, []);
 
   useEffect(() => {
     console.log("memoData", memoData);
   }, [memoData]);
+  useEffect(() => {
+    console.log("selectedData", selectedData);
+  }, [selectedData]);
 
   return (
     <>

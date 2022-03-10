@@ -4,22 +4,38 @@ import { Dialog, Transition } from "@headlessui/react";
 import { OpenModalContext } from "../../App";
 import dayjs from "dayjs";
 import { db } from "../../firebase/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  doc,
+  updateDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 
 export default function EditCreateModal({ data, type }) {
   const { openModal, setOpenModal } = useContext(OpenModalContext);
+  const { selectedData, setSelectedData } = useContext(OpenModalContext);
   const [memo, setMemo] = useState("");
   const [date, setDate] = useState("");
 
   const cancelButtonRef = useRef(null);
 
-  type === "edit" ? console.log("edit") : console.log("create");
+  // type === "edit" ? console.log("edit") : console.log("create");
 
   // onSubmit Event ===================================
   const handleUpdateMemo = async (event) => {
     event.preventDefault();
-    const updatedMemo = event.target.value;
-    console.log("update data", updatedMemo);
+    console.log("update data", memo);
+
+    const newDocRef = doc(db, "memos", selectedData.id);
+    await updateDoc(newDocRef, {
+      memo: memo,
+    });
+    await updateDoc(newDocRef, {
+      timestamp: serverTimestamp(),
+    });
+
+    window.location.reload(false);
   };
 
   const handleCreateMemo = async (event) => {
@@ -42,12 +58,11 @@ export default function EditCreateModal({ data, type }) {
       "YYYY/MM/DD"
     );
     setDate(displayDate);
-
-    type === "edit" && setMemo(data.memo);
   }, []);
+
   useEffect(() => {
-    console.log("memo data: ", memo);
-  }, [memo]);
+    type === "edit" && setMemo(selectedData.memo);
+  }, [selectedData]);
 
   return (
     <Transition.Root show={openModal} as={Fragment}>
