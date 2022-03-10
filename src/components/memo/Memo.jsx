@@ -20,6 +20,7 @@ export default function Memo() {
     }
     getMemos();
     setIsLoading(false);
+
   }, []);
 
   useEffect(() => {

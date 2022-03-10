@@ -2,7 +2,6 @@ import React from "react";
 
 const IconPick = (props) => {
   const iconId = props.iconId;
-  console.log("iconPick iconCode:", iconId);
   const iconArray = [
     {
       id: "01d",
@@ -96,9 +95,6 @@ const IconPick = (props) => {
     },
   ];
   const foundSame = iconArray.find((element) => element.id === iconId);
-  console.log("picked object ", foundSame);
-  console.log("picked Description: ", foundSame.des);
-  console.log("picked iconURL: ", foundSame.des);
 
   return (
     <>

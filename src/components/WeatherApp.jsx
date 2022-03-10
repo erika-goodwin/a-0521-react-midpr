@@ -1,7 +1,9 @@
-import React, { Component, createContext, useEffect, useState } from "react";
+import React, { Component, useContext, useEffect, useState } from "react";
 import WeatherDetails from "./WeatherDetails";
 import { ReactComponent as ReactLogo } from "../image/loading.svg";
-import {writingData} from '../firebase/firebase'
+import { writingData } from "../firebase/firebase";
+import { OpenModalContext } from "../App";
+import EditCreateModal from "./memo/EditCreateModal";
 
 // const  IconContext = createContext();
 
@@ -20,7 +22,7 @@ const WeatherApp = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-
+  const { openModal, setOpenModal } = useContext(OpenModalContext);
 
   // Default [Vancouver] ===================================
   useEffect(() => {
@@ -43,7 +45,6 @@ const WeatherApp = () => {
     fetch(url)
       .then((res) => res.json())
       .then((response) => {
-        console.log("resp: ", response);
         setState({
           temp: response.main.temp,
           cityName: response.name,
@@ -58,7 +59,6 @@ const WeatherApp = () => {
         });
       })
       .catch((error) => {
-        console.log(error);
         alert("No such a city found");
       })
       .finally(() => {
@@ -69,14 +69,27 @@ const WeatherApp = () => {
   return (
     <>
       {isLoading && <ReactLogo className="logo" />}
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
-          <p className="pt-2 text-4xl  font-extrabold text-gray-900 sm:text-4xl sm:tracking-tight lg:text-6xl">
-            Weather
-          </p>
-          <p className="max-w-xl mt-1 mb-1 text-xl text-gray-500">
-            Check your city's weather here
-          </p>
+
+      {state.cityName && <EditCreateModal type="create" data={state} />}
+      <header className="bg-white shadow ">
+        <div className="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8  flex flex-row ">
+          <div className="grow">
+            <p className="pt-2 text-4xl  font-extrabold text-gray-900 sm:text-4xl sm:tracking-tight lg:text-6xl">
+              Weather
+            </p>
+            <p className="max-w-xl mt-1 mb-1 text-xl text-gray-500">
+              Check your city's weather here
+            </p>
+          </div>
+          <div className="flex flex-col ">
+            <button
+              type="button"
+              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-yellow-700 bg-yellow-100 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 m-auto"
+              onClick={() => setOpenModal(true)}
+            >
+              Create Memo
+            </button>
+          </div>
         </div>
       </header>
       <div className="text-center sm:px-6 lg:px-8">

@@ -27,7 +27,7 @@ const Clock = ({ dt, timezone }) => {
 
   return (
     <>
-      <h4 className="text-lg font-bold text-center">Local Time:</h4>
+
       <p className="pt-1">{date}</p>
     </>
   );

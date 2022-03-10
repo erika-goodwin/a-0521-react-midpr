@@ -2,13 +2,9 @@ import React, { Component } from "react";
 import Calender from "./Calender";
 import Clock from "./Clock";
 import IconPick from "./IconPick";
-import IconContext from "./WeatherApp";
 
 export default class WeatherDetails extends Component {
   render() {
-    // const iconUrl = `http://openweathermap.org/img/w/${this.props.icon}.png`;
-    console.log("wd iconCode:", this.props.icon);
-
     return (
       <div className="bg-white shadow sm:rounded-lg sm:px-6 lg:px-15 xl:px-20">
         <div className="px-4 py-5 sm:p-6">
@@ -17,9 +13,11 @@ export default class WeatherDetails extends Component {
           </h3>
           <div className="grid grid-rows-7 grid-col-4 gap-4 text-center mt-5">
             <div className="col-span-2 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
+            <h4 className="text-lg font-bold text-center">Local Date:</h4>
               <Calender timezone={this.props.timezone} />
             </div>
             <div className="col-span-2 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-between">
+            <h4 className="text-lg font-bold text-center">Local Time:</h4>
               <Clock timezone={this.props.timezone} />
             </div>
             <div className="col-span-4 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-evenly">
