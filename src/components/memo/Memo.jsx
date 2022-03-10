@@ -1,19 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { db } from "../../firebase/firebase";
 import { getDocs, collection } from "firebase/firestore";
+import EachMemo from "./EachMemo";
 
 export default function Memo() {
+  const [memoData, setMemoData] = useState([]);
+
   useEffect(() => {
     async function getMemos() {
       const colRef = collection(db, "memos");
       const docSnap = await getDocs(colRef);
 
       docSnap.forEach((element) => {
-        console.log(element.data());
+        setMemoData((pre) => [...pre, element.data()]);
       });
     }
     getMemos();
   }, []);
+
+  useEffect(() => {
+    console.log("memoData", memoData);
+  }, [memoData]);
 
   return (
     <div>
@@ -43,136 +50,10 @@ export default function Memo() {
                   </select>
                 </div>
               </div>
-              <div className="mt-6">
-                <div className="max-w-4xl px-10 py-6 mx-auto bg-white rounded-lg shadow-md">
-                  <div className="flex items-center justify-between">
-                    <span className="font-light text-gray-600">
-                      Jun 1, 2020
-                    </span>
-                    <a
-                      href="#"
-                      className="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500"
-                    >
-                      Edit
-                    </a>
-                  </div>
-                  <div className="mt-2">
-                    <a
-                      href="#"
-                      className="text-2xl font-bold text-gray-700 hover:underline"
-                    >
-                      Broken Clouds/1021　hPa
-                    </a>
-                    <p className="mt-2 text-gray-600">
-                      I had a bad headache. Took a pill.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-6">
-                <div className="max-w-4xl px-10 py-6 mx-auto bg-white rounded-lg shadow-md">
-                  <div className="flex items-center justify-between">
-                    <span className="font-light text-gray-600">
-                      mar 4, 2019
-                    </span>
-                    <a
-                      href="#"
-                      className="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500"
-                    >
-                      Edit
-                    </a>
-                  </div>
-                  <div className="mt-2">
-                    <a
-                      href="#"
-                      className="text-2xl font-bold text-gray-700 hover:underline"
-                    >
-                      Few Clouds/1027 hPa
-                    </a>
-                    <p className="mt-2 text-gray-600">
-                      very light headache. No pill but lot of water.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-6">
-                <div className="max-w-4xl px-10 py-6 mx-auto bg-white rounded-lg shadow-md">
-                  <div className="flex items-center justify-between">
-                    <span className="font-light text-gray-600">
-                      Feb 14, 2019
-                    </span>
-                    <a
-                      href="#"
-                      className="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500"
-                    >
-                      Edit
-                    </a>
-                  </div>
-                  <div className="mt-2">
-                    <a
-                      href="#"
-                      className="text-2xl font-bold text-gray-700 hover:underline"
-                    >
-                      Light Rain/1017 hPa
-                    </a>
-                    <p className="mt-2 text-gray-600">
-                      I needed to skip my class due to headache. Took a pill.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-6">
-                <div className="max-w-4xl px-10 py-6 mx-auto bg-white rounded-lg shadow-md">
-                  <div className="flex items-center justify-between">
-                    <span className="font-light text-gray-600">
-                      Dec 23, 2018
-                    </span>
-                    <a
-                      href="#"
-                      className="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500"
-                    >
-                      Edit
-                    </a>
-                  </div>
-                  <div className="mt-2">
-                    <a
-                      href="#"
-                      className="text-2xl font-bold text-gray-700 hover:underline"
-                    >
-                      Few Clouds/1016 hPa
-                    </a>
-                    <p className="mt-2 text-gray-600">
-                      very light headache. No pill but lot of water.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-6">
-                <div className="max-w-4xl px-10 py-6 mx-auto bg-white rounded-lg shadow-md">
-                  <div className="flex items-center justify-between">
-                    <span className="font-light text-gray-600">
-                      Mar 10, 2018
-                    </span>
-                    <a
-                      href="#"
-                      className="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500"
-                    >
-                      Edit
-                    </a>
-                  </div>
-                  <div className="mt-2">
-                    <a
-                      href="#"
-                      className="text-2xl font-bold text-gray-700 hover:underline"
-                    >
-                      Clear Sky/1011 hPa
-                    </a>
-                    <p className="mt-2 text-gray-600">
-                      I had a bad headache. Took a pill.
-                    </p>
-                  </div>
-                </div>
-              </div>
+
+              {memoData?.map((data) => {
+                return <EachMemo data={data} key={data.id} />;
+              })}
               <div className="mt-8"></div>
             </div>
           </div>

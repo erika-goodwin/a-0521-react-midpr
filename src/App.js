@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Memo from "./components/memo/Memo";
 import Navbar from "./components/Navbar";
 import WeatherApp from "./components/WeatherApp";
 import "./css/app.scss";
 
+export const OpenModalContext = React.createContext(null);
+
 const App = () => {
-  //ContextAPI
+  const [openModal, setOpenModal] = useState(false);
+  const contextValue = { openModal, setOpenModal };
 
   return (
-    <div className="h-screen w-screen items-center">
+    <OpenModalContext.Provider
+      value={contextValue}
+      className="h-screen w-screen items-center"
+    >
       {/* Navigation bar here */}
       <Navbar />
 
@@ -18,7 +24,7 @@ const App = () => {
         <Route path="/" element={<WeatherApp />} />
         <Route path="/memo" element={<Memo />} />
       </Routes>
-    </div>
+    </OpenModalContext.Provider>
   );
 };
 
