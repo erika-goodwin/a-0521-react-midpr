@@ -1,12 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { db } from "../../firebase/firebase";
 import { getDocs, collection } from "firebase/firestore";
 import { ReactComponent as ReactLogo } from "../../image/loading.svg";
 import EachMemo from "./EachMemo";
+import EditCreateModal from "./EditCreateModal";
+import { OpenModalContext } from "../../App";
 
 export default function Memo() {
   const [memoData, setMemoData] = useState([]);
+  const [selectedData, setSelectedData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  console.log("memo page render");
+  const { openModal, setOpenModal } = useContext(OpenModalContext);
+
+  const openModalFunction = (data) => {
+    setOpenModal(true);
+    setSelectedData(data);
+    console.log("open modal function, data: ", data);
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -20,7 +31,7 @@ export default function Memo() {
     }
     getMemos();
     setIsLoading(false);
-
+    console.log("fetching data ");
   }, []);
 
   useEffect(() => {
@@ -30,6 +41,14 @@ export default function Memo() {
   return (
     <>
       {isLoading && <ReactLogo className="logo" />}
+
+      {selectedData && (
+        <EditCreateModal
+          kay={selectedData.id}
+          data={selectedData}
+          type="edit"
+        />
+      )}
       <div>
         <header className="bg-white shadow">
           <div className="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
@@ -59,7 +78,13 @@ export default function Memo() {
                 </div>
 
                 {memoData?.map((data) => {
-                  return <EachMemo data={data} key={data.id} />;
+                  return (
+                    <EachMemo
+                      data={data}
+                      key={data.id}
+                      openModalFunction={openModalFunction}
+                    />
+                  );
                 })}
                 <div className="mt-8"></div>
               </div>

@@ -24,6 +24,8 @@ const WeatherApp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { openModal, setOpenModal } = useContext(OpenModalContext);
 
+  console.log('weather page render')
+
   // Default [Vancouver] ===================================
   useEffect(() => {
     const defaultCity = "Vancouver";

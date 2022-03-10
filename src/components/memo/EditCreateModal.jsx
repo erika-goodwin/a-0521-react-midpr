@@ -13,10 +13,13 @@ export default function EditCreateModal({ data, type }) {
 
   const cancelButtonRef = useRef(null);
 
+  type === "edit" ? console.log("edit") : console.log("create");
+
   // onSubmit Event ===================================
   const handleUpdateMemo = async (event) => {
     event.preventDefault();
-    console.log("update data");
+    const updatedMemo = event.target.value;
+    console.log("update data", updatedMemo);
   };
 
   const handleCreateMemo = async (event) => {
@@ -42,6 +45,9 @@ export default function EditCreateModal({ data, type }) {
 
     type === "edit" && setMemo(data.memo);
   }, []);
+  useEffect(() => {
+    console.log("memo data: ", memo);
+  }, [memo]);
 
   return (
     <Transition.Root show={openModal} as={Fragment}>
@@ -50,6 +56,7 @@ export default function EditCreateModal({ data, type }) {
         className="fixed z-10 inset-0 overflow-y-auto"
         initialFocus={cancelButtonRef}
         onClose={setOpenModal}
+        open={openModal}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -208,8 +215,8 @@ export default function EditCreateModal({ data, type }) {
                             name="memo"
                             id="memo"
                             // autoComplete="street-address"
-                            onChange={(e) => setMemo(e.target.value)}
                             value={memo}
+                            onChange={(e) => setMemo(e.target.value)}
                             className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                           />
                         </div>
