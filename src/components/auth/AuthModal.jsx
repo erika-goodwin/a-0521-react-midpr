@@ -2,21 +2,70 @@
 import { Fragment, useRef, useContext, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { OpenModalContext } from "../../App";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { auth } from "../../firebase/firebase";
+import { useNavigate } from "react-router-dom";
 
 export default function AuthModal() {
   const { showAuthModal, setShowAuthModal } = useContext(OpenModalContext);
   const [login, setLogin] = useState(true);
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [userStatus, setUserStatus] = useState(false);
+  const navigate = useNavigate();
+
   const cancelButtonRef = useRef(null);
+
+  const handleCreateNewAccount = async () => {
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log("success create account", user);
+
+        alert("successfully created account", user);
+        setUserStatus(true);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(`Error code ${errorCode} : ${errorMessage} `);
+      })
+      .finally(() => {
+        setShowAuthModal(false);
+        //Navigate to the memo
+        const path = "/";
+        navigate(path);
+      });
+  };
+  const handleSignInAccount = async () => {
+    await signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        alert("successfully signed in account", user);
+        setUserStatus(true);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(`Error code ${errorCode} : ${errorMessage} `);
+      });
+  };
 
   useEffect(() => {
     // console.log("modal Open(true)/Close(false)", showAuthModal);
     showAuthModal === false && setLogin(true);
     // showAuthModal === false && console.log("much & setLogin", login);
   }, [showAuthModal]);
-  // useEffect(() => {
-  //   console.log("loginstatus updated", login);
-  // }, [login]);
+  useEffect(() => {
+    console.log("User Status", userStatus);
+  }, [userStatus]);
 
   return (
     <Transition.Root show={showAuthModal} as={Fragment}>
@@ -64,7 +113,14 @@ export default function AuthModal() {
                   </h3>
                 </div>
                 <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                  <form className="space-y-5" action="submit" method="POST">
+                  <form
+                    className="space-y-5"
+                    action="submit"
+                    method="POST"
+                    onSubmit={
+                      login ? handleSignInAccount : handleCreateNewAccount
+                    }
+                  >
                     <div>
                       <label
                         htmlFor="email"
@@ -80,6 +136,7 @@ export default function AuthModal() {
                           autoComplete="email"
                           required
                           className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                          onChange={(e) => setEmail(e.target.value)}
                         />
                       </div>
                     </div>
@@ -99,6 +156,7 @@ export default function AuthModal() {
                           autoComplete="current-password"
                           required
                           className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                          onChange={(e) => setPassword(e.target.value)}
                         />
                       </div>
                     </div>
@@ -131,7 +189,6 @@ export default function AuthModal() {
                       <button
                         type="submit"
                         className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
-                        onClick={() => setShowAuthModal(false)}
                       >
                         {login ? "Log in" : "Sign up"}
                       </button>
