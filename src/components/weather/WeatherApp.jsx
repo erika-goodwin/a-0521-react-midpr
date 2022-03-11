@@ -1,9 +1,8 @@
 import React, { Component, useContext, useEffect, useState } from "react";
 import WeatherDetails from "./WeatherDetails";
-import { ReactComponent as ReactLogo } from "../image/loading.svg";
-import { writingData } from "../firebase/firebase";
-import { OpenModalContext } from "../App";
-import EditCreateModal from "./memo/EditCreateModal";
+import { ReactComponent as ReactLogo } from "../../image/loading.svg";
+import { OpenModalContext } from "../../App";
+import EditCreateModal from "../memo/EditCreateModal";
 
 // const  IconContext = createContext();
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { db } from "../../firebase/firebase";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, query, orderBy } from "firebase/firestore";
 import { ReactComponent as ReactLogo } from "../../image/loading.svg";
 import EachMemo from "./EachMemo";
 import EditCreateModal from "./EditCreateModal";
@@ -24,8 +24,8 @@ export default function Memo() {
     setIsLoading(true);
     async function getMemos() {
       const colRef = collection(db, "memos");
-      const docSnap = await getDocs(colRef);
-
+      const q = query(colRef, orderBy("date"));
+      const docSnap = await getDocs(q);
       docSnap.forEach((element) => {
         const object = { ...element.data(), id: element.id };
         setMemoData((pre) => [...pre, object]);
@@ -37,6 +37,9 @@ export default function Memo() {
 
   useEffect(() => {
     console.log("memoData", memoData);
+    const sortedmemoData = memoData.sort(function (a, b) {
+      return new Date(b.date) - new Date(a.date);
+    });
   }, [memoData]);
   useEffect(() => {
     console.log("selectedData", selectedData);
@@ -71,7 +74,7 @@ export default function Memo() {
               <div className="w-full lg:w-10/12">
                 <div className="flex items-center justify-between">
                   <h1 className="text-xl font-bold text-gray-700 md:text-2xl">
-                    Post
+                    {/* Post */}
                   </h1>
                   <div>
                     <select className="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">

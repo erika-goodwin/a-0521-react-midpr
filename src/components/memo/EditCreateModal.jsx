@@ -3,6 +3,7 @@ import { Fragment, useRef, useContext, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { OpenModalContext } from "../../App";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase/firebase";
 import {
   collection,
@@ -19,10 +20,11 @@ export default function EditCreateModal({ data, type }) {
   const [date, setDate] = useState("");
 
   const cancelButtonRef = useRef(null);
+  const navigate = useNavigate();
 
   // type === "edit" ? console.log("edit") : console.log("create");
 
-  // onSubmit Event ===================================
+  // onSubmit Update Event ===================================
   const handleUpdateMemo = async (event) => {
     event.preventDefault();
     console.log("update data", memo);
@@ -49,6 +51,10 @@ export default function EditCreateModal({ data, type }) {
 
     const docRef = await addDoc(collection(db, "memos"), submitData);
     console.log("Document written with ID: ", docRef.id);
+
+    //Navigate to the memo
+    const path = "/memo";
+    navigate(path);
   };
 
   useEffect(() => {
