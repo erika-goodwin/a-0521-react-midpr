@@ -11,11 +11,11 @@ export default function Memo() {
   // const [selectedData, setSelectedData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { openModal, setOpenModal } = useContext(OpenModalContext);
+  const { openMemoModal, setOpenMemoModal } = useContext(OpenModalContext);
   const { selectedData, setSelectedData } = useContext(OpenModalContext);
 
   const openModalFunction = (data) => {
-    setOpenModal(true);
+    setOpenMemoModal(true);
     setSelectedData(data);
     console.log("open modal function, data: ", data);
   };
@@ -37,9 +37,9 @@ export default function Memo() {
 
   useEffect(() => {
     console.log("memoData", memoData);
-    const sortedmemoData = memoData.sort(function (a, b) {
-      return new Date(b.date) - new Date(a.date);
-    });
+    // const sortedmemoData = memoData.sort(function (a, b) {
+    //   return new Date(b.date) - new Date(a.date);
+    // });
   }, [memoData]);
   useEffect(() => {
     console.log("selectedData", selectedData);

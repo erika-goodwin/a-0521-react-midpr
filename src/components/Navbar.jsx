@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { OpenModalContext } from "../App";
 
 export default function Navbar(props) {
+
+   const { showAuthModal, setShowAuthModal } = useContext(OpenModalContext);
   return (
     <>
       <div className="">
@@ -15,7 +18,7 @@ export default function Navbar(props) {
             <>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
-                  <div className="flex items-center">
+                  <div className="flex items-center w-full">
                     <div className="flex-shrink-0">
                       <img
                         className="h-8 w-8"
@@ -23,21 +26,34 @@ export default function Navbar(props) {
                         alt="Workflow"
                       />
                     </div>
-                    <div className="hidden md:block">
-                      <div className="ml-10 flex items-baseline space-x-4">
-                        <Link
-                          to="/"
-                          className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
-                          aria-current="page"
-                        >
-                          Weather App
-                        </Link>
-                        <Link
-                          to="/memo"
-                          className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                        >
-                          Memo
-                        </Link>
+                    <div className="hidden md:block w-full">
+                      <div className="flex flex-row justify-between">
+                        <div className="flex flex-col justify-center items-baseline space-x-4" >
+                          <div className="ml-10 flex">
+                          <Link
+                            to="/"
+                            className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                            aria-current="page"
+                          >
+                            Weather App
+                          </Link>
+                          <Link
+                            to="/memo"
+                            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium "
+                          >
+                            Memo
+                          </Link>
+                          </div>
+                        </div>
+                        <div className="flex flex-col glow text-right">
+                          <button
+                            type="button"
+                            className="inline-flex items-center px-4 py-2  border border-transparent text-base font-medium rounded-md text-yellow-700 bg-yellow-300 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 m-auto "
+                            onClick={() => setShowAuthModal(true)}
+                          >
+                            Log in
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -76,6 +92,15 @@ export default function Navbar(props) {
                   >
                     Memo
                   </Link>
+                  <div className="flex flex-col glow ">
+                          <button
+                            type="button"
+                            className="inline-flex items-center  px-3 py-2 border border-transparent text-base font-medium rounded-md text-yellow-700 bg-yellow-300 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 ml-auto"
+                            onClick={() => setShowAuthModal(true)}
+                          >
+                            Log in
+                          </button>
+                        </div>
                 </div>
               </Disclosure.Panel>
             </>

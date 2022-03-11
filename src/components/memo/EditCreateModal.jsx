@@ -14,7 +14,7 @@ import {
 } from "firebase/firestore";
 
 export default function EditCreateModal({ data, type }) {
-  const { openModal, setOpenModal } = useContext(OpenModalContext);
+  const { openMemoModal, setOpenMemoModal } = useContext(OpenModalContext);
   const { selectedData, setSelectedData } = useContext(OpenModalContext);
   const [memo, setMemo] = useState("");
   const [date, setDate] = useState("");
@@ -71,13 +71,13 @@ export default function EditCreateModal({ data, type }) {
   }, [selectedData]);
 
   return (
-    <Transition.Root show={openModal} as={Fragment}>
+    <Transition.Root show={openMemoModal} as={Fragment}>
       <Dialog
         as="div"
         className="fixed z-10 inset-0 overflow-y-auto"
         initialFocus={cancelButtonRef}
-        onClose={setOpenModal}
-        open={openModal}
+        onClose={setOpenMemoModal}
+        open={openMemoModal}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -304,7 +304,7 @@ export default function EditCreateModal({ data, type }) {
                       <button
                         type="button"
                         className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        onClick={() => setOpenModal(false)}
+                        onClick={() => setOpenMemoModal(false)}
                         ref={cancelButtonRef}
                       >
                         Cancel
@@ -312,7 +312,7 @@ export default function EditCreateModal({ data, type }) {
                       <button
                         type="submit"
                         className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        onClick={() => setOpenModal(false)}
+                        onClick={() => setOpenMemoModal(false)}
                       >
                         {type === "edit" ? "Update" : "Save"}
                       </button>

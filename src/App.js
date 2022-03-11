@@ -8,9 +8,20 @@ import "./css/app.scss";
 export const OpenModalContext = React.createContext(null);
 
 const App = () => {
-  const [openModal, setOpenModal] = useState(false);
+  const [openMemoModal, setOpenMemoModal] = useState(false);
   const [selectedData, setSelectedData] = useState([]);
-  const contextValue = { openModal, setOpenModal, selectedData, setSelectedData };
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  // const [login, setLogin] = useState(true);
+  const contextValue = {
+    openMemoModal,
+    setOpenMemoModal,
+    selectedData,
+    setSelectedData,
+    showAuthModal,
+    setShowAuthModal,
+    // login,
+    // setLogin,
+  };
 
   return (
     <OpenModalContext.Provider

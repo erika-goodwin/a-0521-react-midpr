@@ -3,6 +3,7 @@ import WeatherDetails from "./WeatherDetails";
 import { ReactComponent as ReactLogo } from "../../image/loading.svg";
 import { OpenModalContext } from "../../App";
 import EditCreateModal from "../memo/EditCreateModal";
+import AuthModal from "../auth/AuthModal";
 
 // const  IconContext = createContext();
 
@@ -21,9 +22,9 @@ const WeatherApp = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  const { openModal, setOpenModal } = useContext(OpenModalContext);
+  const { openMemoModal, setOpenMemoModal } = useContext(OpenModalContext);
 
-  console.log('weather page render')
+  
 
   // Default [Vancouver] ===================================
   useEffect(() => {
@@ -72,6 +73,9 @@ const WeatherApp = () => {
       {isLoading && <ReactLogo className="logo" />}
 
       {state.cityName && <EditCreateModal type="create" data={state} />}
+
+<AuthModal />
+
       <header className="bg-white shadow ">
         <div className="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8  flex flex-row ">
           <div className="grow">
@@ -85,8 +89,8 @@ const WeatherApp = () => {
           <div className="flex flex-col ">
             <button
               type="button"
-              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-yellow-700 bg-yellow-100 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 m-auto"
-              onClick={() => setOpenModal(true)}
+              className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-yellow-700 bg-yellow-100 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 m-auto"
+              onClick={() => setOpenMemoModal(true)}
             >
               Create Memo
             </button>
