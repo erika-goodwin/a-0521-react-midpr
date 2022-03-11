@@ -8,8 +8,7 @@ import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { OpenModalContext } from "../App";
 
 export default function Navbar(props) {
-
-   const { showAuthModal, setShowAuthModal } = useContext(OpenModalContext);
+  const { showAuthModal, setShowAuthModal } = useContext(OpenModalContext);
   return (
     <>
       <div className="">
@@ -28,21 +27,21 @@ export default function Navbar(props) {
                     </div>
                     <div className="hidden md:block w-full">
                       <div className="flex flex-row justify-between">
-                        <div className="flex flex-col justify-center items-baseline space-x-4" >
+                        <div className="flex flex-col justify-center items-baseline space-x-4">
                           <div className="ml-10 flex">
-                          <Link
-                            to="/"
-                            className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
-                            aria-current="page"
-                          >
-                            Weather App
-                          </Link>
-                          <Link
-                            to="/memo"
-                            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium "
-                          >
-                            Memo
-                          </Link>
+                            <Link
+                              to="/"
+                              className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                              aria-current="page"
+                            >
+                              Weather App
+                            </Link>
+                            <Link
+                              to="/memo"
+                              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium "
+                            >
+                              Memo
+                            </Link>
                           </div>
                         </div>
                         <div className="flex flex-col glow text-right">
@@ -93,14 +92,14 @@ export default function Navbar(props) {
                     Memo
                   </Link>
                   <div className="flex flex-col glow ">
-                          <button
-                            type="button"
-                            className="inline-flex items-center  px-3 py-2 border border-transparent text-base font-medium rounded-md text-yellow-700 bg-yellow-300 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 ml-auto"
-                            onClick={() => setShowAuthModal(true)}
-                          >
-                            Log in
-                          </button>
-                        </div>
+                    <button
+                      type="button"
+                      className="inline-flex items-center  px-3 py-2 border border-transparent text-base font-medium rounded-md text-yellow-700 bg-yellow-300 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 ml-auto"
+                      onClick={() => setShowAuthModal(true)}
+                    >
+                      Log in
+                    </button>
+                  </div>
                 </div>
               </Disclosure.Panel>
             </>
