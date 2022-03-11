@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import AuthModal from "./components/auth/AuthModal";
 import Memo from "./components/memo/Memo";
 import Navbar from "./components/Navbar";
 import WeatherApp from "./components/weather/WeatherApp";
@@ -30,7 +31,7 @@ const App = () => {
     >
       {/* Navigation bar here */}
       <Navbar />
-
+      <AuthModal />
       {/* Routes */}
       <Routes>
         <Route path="/" element={<WeatherApp />} />

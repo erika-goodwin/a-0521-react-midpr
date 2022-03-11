@@ -72,8 +72,8 @@ const WeatherApp = () => {
       {isLoading && <ReactLogo className="logo" />}
 
       {state.cityName && <EditCreateModal type="create" data={state} />}
-      {/* {showAuthModal && <AuthModal />} */}
-      <AuthModal />
+
+
 
       <header className="bg-white shadow ">
         <div className="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8  flex flex-row ">

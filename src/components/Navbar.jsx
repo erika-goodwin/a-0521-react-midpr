@@ -67,7 +67,7 @@ export default function Navbar(props) {
                           <div className="ml-10 flex">
                             <Link
                               to="/"
-                              className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                              className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium mr-2"
                               aria-current="page"
                             >
                               Weather App

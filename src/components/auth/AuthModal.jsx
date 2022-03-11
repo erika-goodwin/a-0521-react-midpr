@@ -5,10 +5,16 @@ import { OpenModalContext } from "../../App";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged,
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
 } from "firebase/auth";
-import { auth } from "../../firebase/firebase";
-import { useNavigate } from "react-router-dom";
+import {
+  auth,
+  googleProvider,
+  facebookProvider,
+} from "../../firebase/firebase";
+// import { useNavigate } from "react-router-dom";
 
 export default function AuthModal() {
   const { showAuthModal, setShowAuthModal } = useContext(OpenModalContext);
@@ -17,7 +23,7 @@ export default function AuthModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const cancelButtonRef = useRef(null);
 
@@ -27,14 +33,14 @@ export default function AuthModal() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log("success create account", user);
+        // console.log("success create account", user);
 
-        alert("successfully created account", user);
+        // alert("successfully created account", user);
         // setUserStatus(true);
 
         //Redirect
-        const path = "/";
-        navigate(path);
+        // const path = "/";
+        // navigate(path);
         setShowAuthModal(false);
       })
       .catch((error) => {
@@ -44,18 +50,19 @@ export default function AuthModal() {
         console.log(` Error code : ${errorCode}`);
       });
   };
+
   const handleSignInAccount = async (e) => {
     e.preventDefault();
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        alert("successfully signed in account", user);
+        // alert("successfully signed in account", user);
         // setUserStatus(true);
 
         //Redirect
-        const path = "/";
-        navigate(path);
+        // const path = "/";
+        // navigate(path);
         setShowAuthModal(false);
       })
       .catch((error) => {
@@ -65,6 +72,59 @@ export default function AuthModal() {
         console.log(` Error code : ${errorCode}`);
       });
   };
+
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
+    await signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        console.log("user sign in with Google", user);
+        setShowAuthModal(false);
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        console.log("email error: ", error.email);
+        console.log("error code: ", error.code);
+        console.log("email error", error.email);
+        alert(error.message);
+        // The email of the user's account used.
+
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(" The AuthCredential type that was used.", credential);
+      });
+  };
+  // const handleFacebookSignIn = async (e) => {
+  //   e.preventDefault();
+  //   await signInWithPopup(auth, facebookProvider)
+  //     .then((result) => {
+  //       // This gives you a Google Access Token. You can use it to access the Google API.
+  //       const credential = FacebookAuthProvider.credentialFromResult(result);
+  //       const accessToken = credential.accessToken;
+
+  //       // The signed-in user info.
+  //       const user = result.user;
+  //       console.log("user sign in with Google", user);
+
+  //       setShowAuthModal(false);
+  //     })
+  //     .catch((error) => {
+  //       // Handle Errors here.
+  //       console.log("email error: ", error.email);
+  //       console.log("error code: ", error.code);
+  //       console.log("email error", error.email);
+  //       alert(error.message);
+  //       // The email of the user's account used.
+
+  //       // The AuthCredential type that was used.
+  //       const credential = FacebookAuthProvider.credentialFromError(error);
+  //       console.log(" The AuthCredential type that was used.", credential);
+  //     });
+  // };
 
   useEffect(() => {
     // console.log("modal Open(true)/Close(false)", showAuthModal);
@@ -123,7 +183,7 @@ export default function AuthModal() {
                 <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                   <form
                     className="space-y-5"
-                    action="submit"
+                    // action="submit"
                     method="POST"
                     onSubmit={
                       login ? handleSignInAccount : handleCreateNewAccount
@@ -224,12 +284,35 @@ export default function AuthModal() {
                         </span>
                       </div>
                     </div>
-
-                    <div className="mt-6 grid grid-cols-3 gap-3">
+                    <div className="mt-6 grid grid-cols-2 gap-3">
                       <div>
                         <a
                           href="#"
                           className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                          onClick={handleGoogleSignIn}
+                        >
+                          <span className="sr-only">Sign in with Google</span>
+                          <svg
+                            class="h-5 w-5"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                            <path d="M17.788 5.108A9 9 0 1021 12h-8" />
+                          </svg>
+                        </a>
+                      </div>
+                      {/* <div>
+                        <a
+                          href="#"
+                          className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                          onClick={handleFacebookSignIn}
                         >
                           <span className="sr-only">Sign in with Facebook</span>
                           <svg
@@ -245,23 +328,8 @@ export default function AuthModal() {
                             />
                           </svg>
                         </a>
-                      </div>
-                      <div>
-                        <a
-                          href="#"
-                          className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                        >
-                          <span className="sr-only">Sign in with Twitter</span>
-                          <svg
-                            className="w-5 h-5"
-                            aria-hidden="true"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
-                          </svg>
-                        </a>
-                      </div>
+                      </div> */}
+
                       <div>
                         <a
                           href="#"
@@ -282,14 +350,6 @@ export default function AuthModal() {
                           </svg>
                         </a>
                       </div>
-                      {/* <button
-                        type="button"
-                        className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        onClick={() => setShowAuthModal(false)}
-                        ref={cancelButtonRef}
-                      >
-                        Cancel
-                      </button> */}
                     </div>
                   </div>
                 </div>
