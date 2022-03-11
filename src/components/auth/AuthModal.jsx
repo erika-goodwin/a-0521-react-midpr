@@ -16,12 +16,13 @@ export default function AuthModal() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userStatus, setUserStatus] = useState(false);
+  // const [userStatus, setUserStatus] = useState(false);
   const navigate = useNavigate();
 
   const cancelButtonRef = useRef(null);
 
-  const handleCreateNewAccount = async () => {
+  const handleCreateNewAccount = async (e) => {
+    e.preventDefault();
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
@@ -29,32 +30,39 @@ export default function AuthModal() {
         console.log("success create account", user);
 
         alert("successfully created account", user);
-        setUserStatus(true);
+        // setUserStatus(true);
+
+        //Redirect
+        const path = "/";
+        navigate(path);
+        setShowAuthModal(false);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(`Error code ${errorCode} : ${errorMessage} `);
-      })
-      .finally(() => {
-        setShowAuthModal(false);
-        //Navigate to the memo
-        const path = "/";
-        navigate(path);
+        alert(errorMessage);
+        console.log(` Error code : ${errorCode}`);
       });
   };
-  const handleSignInAccount = async () => {
+  const handleSignInAccount = async (e) => {
+    e.preventDefault();
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         alert("successfully signed in account", user);
-        setUserStatus(true);
+        // setUserStatus(true);
+
+        //Redirect
+        const path = "/";
+        navigate(path);
+        setShowAuthModal(false);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(`Error code ${errorCode} : ${errorMessage} `);
+        alert(errorMessage);
+        console.log(` Error code : ${errorCode}`);
       });
   };
 
@@ -63,9 +71,9 @@ export default function AuthModal() {
     showAuthModal === false && setLogin(true);
     // showAuthModal === false && console.log("much & setLogin", login);
   }, [showAuthModal]);
-  useEffect(() => {
-    console.log("User Status", userStatus);
-  }, [userStatus]);
+  // useEffect(() => {
+  //   console.log("User Status", userStatus);
+  // }, [userStatus]);
 
   return (
     <Transition.Root show={showAuthModal} as={Fragment}>
@@ -171,7 +179,7 @@ export default function AuthModal() {
                             Forgot your password?
                           </a>
                         </div>
-                        {login && (
+                        {login ? (
                           <div className="text-sm mt-2">
                             <a
                               href="#"
@@ -179,6 +187,16 @@ export default function AuthModal() {
                               onClick={() => setLogin(false)}
                             >
                               Do you need to sign up?
+                            </a>
+                          </div>
+                        ) : (
+                          <div className="text-sm mt-2">
+                            <a
+                              href="#"
+                              className="font-medium text-sky-300 hover:text-sky-400"
+                              onClick={() => setLogin(true)}
+                            >
+                              Do you already have an account?
                             </a>
                           </div>
                         )}

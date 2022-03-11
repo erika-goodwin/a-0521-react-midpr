@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 /* This example requires Tailwind CSS v2.0+ */
@@ -11,14 +11,19 @@ import { signOut, onAuthStateChanged } from "firebase/auth";
 
 export default function Navbar(props) {
   const { showAuthModal, setShowAuthModal } = useContext(OpenModalContext);
+  const { userLoggedin, setUseruserLoggedin } = useContext(OpenModalContext);
+
 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
+        setUseruserLoggedin(false);
+        console.log("loged out");
       })
       .catch((error) => {
         // An error happened.
+        console.log("log out error: ", error);
       });
   };
 
@@ -28,13 +33,19 @@ export default function Navbar(props) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
-        // ...
+        setUseruserLoggedin(true);
       } else {
         // User is signed out
         // ...
+        setUseruserLoggedin(false);
       }
     });
   };
+
+  useEffect(() => {
+    handleLoginStatus();
+    console.log(userLoggedin);
+  }, [showAuthModal]);
 
   return (
     <>
@@ -72,13 +83,23 @@ export default function Navbar(props) {
                           </div>
                         </div>
                         <div className="flex flex-col glow text-right">
-                          <button
-                            type="button"
-                            className="inline-flex items-center px-4 py-2  border border-transparent text-base font-medium rounded-md text-yellow-700 bg-yellow-300 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 m-auto "
-                            onClick={() => setShowAuthModal(true)}
-                          >
-                            Log in
-                          </button>
+                          {userLoggedin ? (
+                            <button
+                              type="button"
+                              className="inline-flex items-center px-4 py-2  border border-transparent text-base font-medium rounded-md text-yellow-700 bg-yellow-300 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 m-auto "
+                              onClick={() => handleSignOut(true)}
+                            >
+                              Log out
+                            </button>
+                          ) : (
+                            <button
+                              type="button"
+                              className="inline-flex items-center px-4 py-2  border border-transparent text-base font-medium rounded-md text-yellow-700 bg-yellow-300 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 m-auto "
+                              onClick={() => setShowAuthModal(true)}
+                            >
+                              Log in
+                            </button>
+                          )}
                         </div>
                       </div>
                     </div>

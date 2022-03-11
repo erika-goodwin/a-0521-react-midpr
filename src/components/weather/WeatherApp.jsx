@@ -23,7 +23,7 @@ const WeatherApp = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const { setOpenMemoModal } = useContext(OpenModalContext);
-  const { showAuthModal } = useContext(OpenModalContext);
+  const { userLoggedin } = useContext(OpenModalContext);
 
   // Default [Vancouver] ===================================
   useEffect(() => {
@@ -86,13 +86,15 @@ const WeatherApp = () => {
             </p>
           </div>
           <div className="flex flex-col ">
-            <button
-              type="button"
-              className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-yellow-700 bg-yellow-100 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 m-auto"
-              onClick={() => setOpenMemoModal(true)}
-            >
-              Create Memo
-            </button>
+            {userLoggedin && (
+              <button
+                type="button"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-yellow-700 bg-yellow-100 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 m-auto"
+                onClick={() => setOpenMemoModal(true)}
+              >
+                Create Memo
+              </button>
+            )}
           </div>
         </div>
       </header>
