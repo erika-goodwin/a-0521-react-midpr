@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { Disclosure } from "@headlessui/react";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { OpenModalContext } from "../App";
 import { auth } from "../firebase/firebase";
 import { signOut, onAuthStateChanged } from "firebase/auth";
@@ -12,7 +11,6 @@ import { signOut, onAuthStateChanged } from "firebase/auth";
 export default function Navbar(props) {
   const { showAuthModal, setShowAuthModal } = useContext(OpenModalContext);
   const { userLoggedin, setUseruserLoggedin } = useContext(OpenModalContext);
-
 
   const handleSignOut = () => {
     signOut(auth)

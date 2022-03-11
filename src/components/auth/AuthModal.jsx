@@ -16,7 +16,7 @@ export default function AuthModal() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [userStatus, setUserStatus] = useState(false);
+
   const navigate = useNavigate();
 
   const cancelButtonRef = useRef(null);
