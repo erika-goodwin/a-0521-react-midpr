@@ -7,13 +7,18 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
-  FacebookAuthProvider,
+  // FacebookAuthProvider,
+  GithubAuthProvider,
+  getRedirectResult,
+  signInWithRedirect,
 } from "firebase/auth";
 import {
   auth,
   googleProvider,
-  facebookProvider,
+  // facebookProvider,
+  githubProvider,
 } from "../../firebase/firebase";
+import axios from "axios";
 // import { useNavigate } from "react-router-dom";
 
 export default function AuthModal() {
@@ -89,7 +94,6 @@ export default function AuthModal() {
         // Handle Errors here.
         console.log("email error: ", error.email);
         console.log("error code: ", error.code);
-        console.log("email error", error.email);
         alert(error.message);
         // The email of the user's account used.
 
@@ -98,6 +102,71 @@ export default function AuthModal() {
         console.log(" The AuthCredential type that was used.", credential);
       });
   };
+
+  const githubApiSetup = () => {
+    const url = "https://github.com/login/oauth/authorize";
+
+    axios
+      .get(url)
+      .then((response) => console.log("success GET"))
+      .catch((err) => console.log("error", err));
+  };
+
+  const handleGithubSignIn = async (e) => {
+    e.preventDefault();
+    await signInWithPopup(auth, githubProvider)
+      .then((result) => {
+        console.log('signInWithPopup')
+        // This gives you a Google Access Token. You can use it to access the Gitgub API.
+        const credential = GithubAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+
+        githubApiSetup();
+
+        console.log("user sign in with Github", user);
+        setShowAuthModal(false);
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        console.log("error code: ", error.code);
+        alert(error.message);
+
+        // The AuthCredential type that was used.
+        const credential = GithubAuthProvider.credentialFromError(error);
+        console.log(" The AuthCredential type that was used.", credential);
+      });
+
+    // await signInWithRedirect(auth, githubProvider);
+
+    // await getRedirectResult(auth)
+    //   .then((result) => {
+    //     const credential = GithubAuthProvider.credentialFromResult(result);
+    //     if (credential) {
+    //       // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+    //       const token = credential.accessToken;
+    //       // ...
+    //     }
+
+    //     // The signed-in user info.
+    //     const user = result.user;
+
+    //     console.log("user sign in with Github", user);
+    //   })
+    //   .catch((error) => {
+    //     // Handle Errors here.
+    //     console.log("email error: ", error.email);
+    //     console.log("error code: ", error.code);
+    //     alert(error.message);
+    //     // The email of the user's account used.
+
+    //     // The AuthCredential type that was used.
+    //     const credential = GithubAuthProvider.credentialFromError(error);
+    //     console.log(" The AuthCredential type that was used.", credential);
+    //   });
+  };
+
   // const handleFacebookSignIn = async (e) => {
   //   e.preventDefault();
   //   await signInWithPopup(auth, facebookProvider)
@@ -293,15 +362,15 @@ export default function AuthModal() {
                         >
                           <span className="sr-only">Sign in with Google</span>
                           <svg
-                            class="h-5 w-5"
+                            className="h-5 w-5"
                             width="24"
                             height="24"
                             viewBox="0 0 24 24"
-                            stroke-width="2"
+                            strokeWidth="2"
                             stroke="currentColor"
                             fill="none"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           >
                             <path stroke="none" d="M0 0h24v24H0z" />{" "}
                             <path d="M17.788 5.108A9 9 0 1021 12h-8" />
@@ -334,6 +403,7 @@ export default function AuthModal() {
                         <a
                           href="#"
                           className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                          onClick={handleGithubSignIn}
                         >
                           <span className="sr-only">Sign in with GitHub</span>
                           <svg

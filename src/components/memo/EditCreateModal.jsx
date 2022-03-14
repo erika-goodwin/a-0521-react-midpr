@@ -18,6 +18,7 @@ export default function EditCreateModal({ data, type }) {
   const { selectedData, setSelectedData } = useContext(OpenModalContext);
   const [memo, setMemo] = useState("");
   const [date, setDate] = useState("");
+  const { userId, setUserId } = useContext(OpenModalContext);
 
   const cancelButtonRef = useRef(null);
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ export default function EditCreateModal({ data, type }) {
     const weather = data.weather;
     const airPressure = data.airpress;
     const humidity = data.humidity;
-    const submitData = { airPressure, date, weather, humidity, memo, cityName };
+    const submitData = { airPressure, date, weather, humidity, memo, cityName, userId };
     console.log("submitted data: ", submitData);
 
     const docRef = await addDoc(collection(db, "memos"), submitData);

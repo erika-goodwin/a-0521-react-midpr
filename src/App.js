@@ -13,6 +13,8 @@ const App = () => {
   const [selectedData, setSelectedData] = useState([]);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [userLoggedin, setUseruserLoggedin] = useState(false);
+  const [userId, setUserId] = useState("");
+
   const contextValue = {
     openMemoModal,
     setOpenMemoModal,
@@ -22,6 +24,8 @@ const App = () => {
     setShowAuthModal,
     userLoggedin,
     setUseruserLoggedin,
+    userId,
+    setUserId,
   };
 
   return (

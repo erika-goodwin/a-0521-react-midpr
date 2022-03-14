@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { db } from "../../firebase/firebase";
-import { getDocs, collection, query, orderBy } from "firebase/firestore";
+import { getDocs, collection, query, orderBy, where } from "firebase/firestore";
 import { ReactComponent as ReactLogo } from "../../image/loading.svg";
 import EachMemo from "./EachMemo";
 import EditCreateModal from "./EditCreateModal";
@@ -8,11 +8,11 @@ import { OpenModalContext } from "../../App";
 
 export default function Memo() {
   const [memoData, setMemoData] = useState([]);
-  // const [selectedData, setSelectedData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const { openMemoModal, setOpenMemoModal } = useContext(OpenModalContext);
   const { selectedData, setSelectedData } = useContext(OpenModalContext);
+  const { userId, setUserId } = useContext(OpenModalContext);
 
   const openModalFunction = (data) => {
     setOpenMemoModal(true);
@@ -20,30 +20,41 @@ export default function Memo() {
     console.log("open modal function, data: ", data);
   };
 
-  useEffect(() => {
-    setIsLoading(true);
-    async function getMemos() {
-      const colRef = collection(db, "memos");
-      const q = query(colRef, orderBy("date"));
-      const docSnap = await getDocs(q);
-      docSnap.forEach((element) => {
-        const object = { ...element.data(), id: element.id };
+  async function getMemos() {
+    const colRef = collection(db, "memos");
+    const q = query(colRef, orderBy("date"), where("userId", "==", userId));
+
+    const docSnap = await getDocs(q);
+    docSnap.forEach((element) => {
+      const object = { ...element.data(), id: element.id };
+      console.log("object", object);
+      console.log("memoData", memoData);
+
+      if (memoData.length) {
+        const isSame = memoData.map((ele) => {
+          return ele.id.includes(object.id);
+        });
+        console.log("isSame", isSame);
+        !isSame && setMemoData((pre) => [...pre, object]);
+      } else {
         setMemoData((pre) => [...pre, object]);
-      });
-    }
-    getMemos();
-    setIsLoading(false);
-  }, []);
+      }
+    });
+  }
 
   useEffect(() => {
-    console.log("memoData", memoData);
-    // const sortedmemoData = memoData.sort(function (a, b) {
-    //   return new Date(b.date) - new Date(a.date);
-    // });
-  }, [memoData]);
-  useEffect(() => {
-    console.log("selectedData", selectedData);
-  }, [selectedData]);
+    setIsLoading(true);
+    getMemos();
+    setIsLoading(false);  
+
+  }, []);
+
+  // useEffect(() => {
+  //   console.log("memoData", memoData);
+  // }, [memoData]);
+  // useEffect(() => {
+  //   console.log("selectedData", selectedData);
+  // }, [selectedData]);
 
   return (
     <>
