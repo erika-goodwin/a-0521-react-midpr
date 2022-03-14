@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import { db } from "../../firebase/firebase";
 import { getDocs, collection, query, orderBy, where } from "firebase/firestore";
 import { ReactComponent as ReactLogo } from "../../image/loading.svg";
 import EachMemo from "./EachMemo";
 import EditCreateModal from "./EditCreateModal";
 import { OpenModalContext } from "../../App";
+import { Link } from "react-router-dom";
 
 export default function Memo() {
   const [memoData, setMemoData] = useState([]);
@@ -20,17 +21,21 @@ export default function Memo() {
     console.log("open modal function, data: ", data);
   };
 
-  async function getMemos() {
+  const getMemos = useCallback(async () => {
+    console.log("getMemo top");
+
     const colRef = collection(db, "memos");
     const q = query(colRef, orderBy("date"), where("userId", "==", userId));
+    console.log("q", q);
 
     const docSnap = await getDocs(q);
+    console.log("getMemo after docSnap", docSnap);
+
     docSnap.forEach((element) => {
       const object = { ...element.data(), id: element.id };
       console.log("object", object);
-      console.log("memoData", memoData);
 
-      if (memoData.length) {
+      if (memoData.length > 0) {
         const isSame = memoData.map((ele) => {
           return ele.id.includes(object.id);
         });
@@ -40,14 +45,17 @@ export default function Memo() {
         setMemoData((pre) => [...pre, object]);
       }
     });
-  }
+  }, [memoData, userId]);
 
   useEffect(() => {
+    console.log("UseEffect");
     setIsLoading(true);
-    getMemos();
-    setIsLoading(false);  
 
-  }, []);
+    getMemos();
+
+    console.log("memoData", memoData);
+    setIsLoading(false);
+  }, [getMemos]);
 
   // useEffect(() => {
   //   console.log("memoData", memoData);
@@ -59,6 +67,7 @@ export default function Memo() {
   return (
     <>
       {isLoading && <ReactLogo className="logo" />}
+      {/* {!memoData && <ReactLogo className="logo" />} */}
 
       {selectedData && (
         <EditCreateModal
@@ -94,6 +103,41 @@ export default function Memo() {
                     </select>
                   </div>
                 </div>
+
+                {memoData.length === 0 && (
+                  <div className="flex justify-center p-20">
+                    <div className="flex flex-col">
+                      {userId !== null ? (
+                        <Link to="/" className="hover:text-teal-600">
+                          Let's log in and start creating your health memo
+                        </Link>
+                      ) : (
+                        <h3>
+                          Let's log in and start creating your health memo
+                        </h3>
+                      )}
+
+                      <div className="flex justify-center p-4">
+                        <img
+                          className="h-15 w-15 ml-2"
+                          src="https://img.icons8.com/doodle/100/000000/treatment-list.png"
+                          alt="Workflow"
+                        />
+                        <img
+                          className="h-15 w-1150 ml-2"
+                          src="https://img.icons8.com/doodle/100/000000/summer.png"
+                          alt="Workflow"
+                        />
+
+                        <img
+                          className="h-15 w-15 ml-2"
+                          src="https://img.icons8.com/doodle/100/000000/checklist--v1.png"
+                          alt="Workflow"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {memoData?.map((data) => {
                   return (

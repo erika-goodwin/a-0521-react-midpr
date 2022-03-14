@@ -53,6 +53,9 @@ export default function AuthModal() {
         const errorMessage = error.message;
         alert(errorMessage);
         console.log(` Error code : ${errorCode}`);
+      })
+      .finally(() => {
+        window.location.reload(false);
       });
   };
 
@@ -75,6 +78,9 @@ export default function AuthModal() {
         const errorMessage = error.message;
         alert(errorMessage);
         console.log(` Error code : ${errorCode}`);
+      })
+      .finally(() => {
+        window.location.reload(false);
       });
   };
 
@@ -101,6 +107,9 @@ export default function AuthModal() {
         const credential = GoogleAuthProvider.credentialFromError(error);
         console.log(" The AuthCredential type that was used.", credential);
       });
+    // .finally(() => {
+    //   window.location.reload(false);
+    // });
   };
 
   const githubApiSetup = () => {
@@ -116,14 +125,14 @@ export default function AuthModal() {
     e.preventDefault();
     await signInWithPopup(auth, githubProvider)
       .then((result) => {
-        console.log('signInWithPopup')
+        console.log("signInWithPopup");
         // This gives you a Google Access Token. You can use it to access the Gitgub API.
         const credential = GithubAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
 
-        githubApiSetup();
+        // githubApiSetup();
 
         console.log("user sign in with Github", user);
         setShowAuthModal(false);

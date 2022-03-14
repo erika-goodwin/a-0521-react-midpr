@@ -16,14 +16,15 @@ export default function Navbar(props) {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
         setUseruserLoggedin(false);
         setUserId(null);
-        console.log("loged out");
+        console.log("logged out");
       })
       .catch((error) => {
-        // An error happened.
         console.log("log out error: ", error);
+      })
+      .finally(() => {
+        window.location.reload(false);
       });
   };
 
@@ -35,10 +36,7 @@ export default function Navbar(props) {
         const uid = user.uid;
         setUserId(uid);
         setUseruserLoggedin(true);
-        
       } else {
-        // User is signed out
-        // ...
         setUserId(null);
         setUseruserLoggedin(false);
       }
