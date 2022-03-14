@@ -23,7 +23,7 @@ export default class WeatherDetails extends Component {
             <div className="col-span-4 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:items-start sm:justify-evenly">
               <h4 className="text-lg font-bold text-center">Max/Min:</h4>
               <p className="pt-1">
-                {this.props.high} / {this.props.low}
+                {this.props.high} / {this.props.low} &#8451
               </p>
             </div>
             <div className="col-span-2 row-span-2 rounded-md bg-gray-50 px-6 py-5 sm:flex sm:justify-between flex-center">
