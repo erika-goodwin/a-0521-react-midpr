@@ -28,7 +28,6 @@ export default function EditCreateModal({ data, type }) {
   // onSubmit Update Event ===================================
   const handleUpdateMemo = async (event) => {
     event.preventDefault();
-    console.log("update data", memo);
 
     const newDocRef = doc(db, "memos", selectedData.id);
     await updateDoc(newDocRef, {
@@ -48,10 +47,10 @@ export default function EditCreateModal({ data, type }) {
     const airPressure = data.airpress;
     const humidity = data.humidity;
     const submitData = { airPressure, date, weather, humidity, memo, cityName, userId };
-    console.log("submitted data: ", submitData);
+   
 
     const docRef = await addDoc(collection(db, "memos"), submitData);
-    console.log("Document written with ID: ", docRef.id);
+    // console.log("Document written with ID: ", docRef.id);
 
     //Navigate to the memo
     const path = "/memo";

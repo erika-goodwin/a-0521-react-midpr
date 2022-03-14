@@ -18,28 +18,22 @@ export default function Memo() {
   const openModalFunction = (data) => {
     setOpenMemoModal(true);
     setSelectedData(data);
-    console.log("open modal function, data: ", data);
   };
 
   const getMemos = useCallback(async () => {
-    console.log("getMemo top");
-
     const colRef = collection(db, "memos");
     const q = query(colRef, orderBy("date"), where("userId", "==", userId));
-    console.log("q", q);
 
     const docSnap = await getDocs(q);
-    console.log("getMemo after docSnap", docSnap);
 
     docSnap.forEach((element) => {
       const object = { ...element.data(), id: element.id };
-      console.log("object", object);
 
       if (memoData.length > 0) {
         const isSame = memoData.map((ele) => {
           return ele.id.includes(object.id);
         });
-        console.log("isSame", isSame);
+
         !isSame && setMemoData((pre) => [...pre, object]);
       } else {
         setMemoData((pre) => [...pre, object]);
@@ -48,12 +42,8 @@ export default function Memo() {
   }, [memoData, userId]);
 
   useEffect(() => {
-    console.log("UseEffect");
     setIsLoading(true);
-
     getMemos();
-
-    console.log("memoData", memoData);
     setIsLoading(false);
   }, [getMemos]);
 

@@ -18,7 +18,6 @@ export default function Navbar(props) {
       .then(() => {
         setUseruserLoggedin(false);
         setUserId(null);
-        console.log("logged out");
       })
       .catch((error) => {
         console.log("log out error: ", error);
@@ -45,7 +44,6 @@ export default function Navbar(props) {
 
   useEffect(() => {
     handleLoginStatus();
-    console.log(`userLoggedin  userId:`, userId);
   }, [showAuthModal]);
 
   return (
