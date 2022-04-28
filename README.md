@@ -1,101 +1,31 @@
-# Getting Started with Create React App
+## React Health Weather App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+*Check today's weather and record your health condition*   
 
-## Available Scripts
+ <img width="715" alt="reactWeatherApp" src="https://user-images.githubusercontent.com/58070973/165808977-5b534eb0-5ead-4fed-aff1-4f29512493f7.png">
 
-In the project directory, you can run:
+This is the react application to check the weather and record your health condition such as headache, joint pain, etc in relation to the weather condition at the time. You can also check the local time of the city. The weather data is fetched from Weather API - OpenWeatherMap. The database and authorization system use firebase. 
 
-### `yarn start`
+  - **Speck:** React.js, Tailwindcss, Firebase,ThirdPartAPI, Heroku
+  
+  - **Check App:** [Check here](https://afternoon-ravine-59477.herokuapp.com/)
+  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Why did I make this?
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+I was learning basics of React hook, React router, and Redux at the time. My teacher informed me that there are many APIs we can use for free and showed me what we can do. This led me to try using API myself. Furthermore, after I learned how to make a backend side and authorization function with Node.js, I upgraded this weather app with firebase's database and authorization services. The intent of the memo feature is to be able to track your personal health with the weather. The idea originated from my personal experience of being prone to headaches myself.
 
-### `yarn test`
+### What was challenging?
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I always try to use a language or tool that I have never used before as I believe practice helps expand my knowledge. While I was working on this project, I was struggling with routes. As a result, I chose to add an additional page and became more familiar with it.
 
-### `yarn build`
+### What did I learn from this project?
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-<!--     // "start": "react-scripts start",
-    // "build": "react-scripts build",
-    // "test": "react-scripts test", -->
-
-    <!-- <Link
-                      to="/"
-                      class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
-                      aria-current="page"
-                    >
-                      Weather App
-                    </Link>
-                    <Link
-                      to="/memo"
-                      class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                    >
-                      Memo
-                    </Link> -->
+I learned how to use design framework to speed up the design portion from this project. When I try a new language or tool, I want to focus on learning the basic rules before starting to read codes. It will help me better understand and have fun with all the processes. For this purpose, using the CSS framework helped me save time with a simple and responsive design.
 
 
+<img width="715" alt="reactWeatherApp" src="https://user-images.githubusercontent.com/58070973/165808985-c9e27481-8eff-488e-9124-5b2e73567869.png">
+<img width="715" alt="reactWeatherApp" src="https://user-images.githubusercontent.com/58070973/165809132-192fe604-ab6b-41b4-92ee-25262430660d.png">
+<img width="715" alt="reactWeatherApp" src="https://user-images.githubusercontent.com/58070973/165809139-45e89cc8-c048-40b4-9c76-0cfaeefd5e36.png">
 
 
-      <!-- <main>
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          {/* Replace with your content */}
-          <div className="px-4 py-6 sm:px-0">
-            <div className="border-4 border-dashed border-gray-200 rounded-lg h-96" />
-          </div>
-          {/* /End replace */}
-        </div>
-      </main> -->
