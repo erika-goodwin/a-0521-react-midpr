@@ -6,7 +6,7 @@
 
 This is the react application to check the weather and record your health condition such as headache, joint pain, etc in relation to the weather condition at the time. You can also check the local time of the city. The weather data is fetched from Weather API - OpenWeatherMap. The database and authorization system use firebase. 
 
-  - **Speck:** React.js, Tailwindcss, Firebase,ThirdPartAPI, Heroku
+  - **Spec:** React.js, Tailwindcss, Firebase,ThirdPartAPI, Heroku
   
   - **Check App:** [Check here](https://afternoon-ravine-59477.herokuapp.com/)
   
