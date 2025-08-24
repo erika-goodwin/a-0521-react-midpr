@@ -1,0 +1,40 @@
+<div class="eh-email-bar-container">
+  <div class="eh-email-bar">
+    <div class="eh-box-copy">
+      <h2>${this.data.bar.header}</h2>
+    </div>
+    <div class="eh-box-submission">
+      <div class="eh-submission-container">
+        <div class="eh-your-name">
+          <label for="eh-name">${this.data.bar.fieldCopyName}</label>
+          <input
+            type="text"
+            name="cheese"
+            id="eh-name"
+            placeholder="${this.data.bar.fieldCopyName}"
+            minlength="2"
+          />
+        </div>
+        <div class="eh-your-email">
+          <label for="eh-email">${this.data.bar.fieldCopyMail}</label>
+          <input
+            type="email"
+            name="email"
+            id="eh-email"
+            placeholder="${this.data.bar.fieldCopyMail}"
+            required
+            minlength="5"
+          />
+        </div>
+        <div class="eh-submit-button">
+          <button type="submit" class="" formtarget="_top">
+            ${this.data.bar.ctaCopy}
+          </button>
+        </div>
+      </div>
+      <div class="eh-submission-copy">
+        <p>${this.data.bar.copy}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<form id="signup-form" novalidate>
+  <input type="email" id="email" name="email" required minlength="5" />
+  <span id="email-error" class="error" aria-live="polite"></span>
+  <button type="submit">Subscribe</button>
+</form>
+<script>
+  const form = document.getElementById("signup-form");
+  const email = document.getElementById("email");
+  const errorSpan = document.getElementById("email-error");
+
+  email.addEventListener("input", () => {
+    email.setCustomValidity("");
+    if (!email.validity.valid) {
+      showError();
+    } else {
+      errorSpan.textContent = "";
+      errorSpan.className = "error";
+    }
+  });
+
+  form.addEventListener("submit", (e) => {
+    if (!email.validity.valid) {
+      showError();
+      e.preventDefault();
+    }
+  });
+
+  function showError() {
+    if (email.validity.valueMissing) {
+      errorSpan.textContent = "Please enter your email address.";
+    } else if (email.validity.typeMismatch) {
+      errorSpan.textContent = "That doesn’t look like a valid email.";
+    } else if (email.validity.tooShort) {
+      errorSpan.textContent = `Email should be at least ${email.minLength} characters; you entered ${email.value.length}.`;
+    }
+    errorSpan.className = "error active";
+  }
+</script>
